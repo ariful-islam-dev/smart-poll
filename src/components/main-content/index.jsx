@@ -24,7 +24,7 @@ class MainContent extends Component {
                 </div>
             )
         }
-        const { poll, getOption, updatePoll, deletePoll } = this.props
+        const { poll, getOpinion, updatePoll, deletePoll } = this.props
         return (
             <div>
                 <h3>{poll.title}</h3>
@@ -32,7 +32,7 @@ class MainContent extends Component {
                 <br />
                 <ParticipationForm
                     poll={poll}
-                    getOption={getOption}
+                    getOpinion={getOpinion}
                     toggleModal={this.toggleModal}
                     deletePoll={deletePoll}
                 />

@@ -73,7 +73,7 @@ class ParticipationForm extends Component {
                     {
                         this.props.poll.options.map(opt => (
                             <FormGroup className="my-2" key={opt.id}>
-                                <Label className="d-flec">
+                                <Label className="d-flex">
                                     <CustomInput
                                         type="radio"
                                         id={opt.id}
@@ -91,7 +91,7 @@ class ParticipationForm extends Component {
                                         }}
                                         className="ml-auto"
                                     >
-                                        {opt.vate}
+                                        {opt.vote}
                                     </span>
                                     <span
                                         style={{

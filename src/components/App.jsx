@@ -55,6 +55,23 @@ class App extends Component {
     handleSearch = searchTerm => {
 
     }
+    getOpinion = response => {
+        const { polls } = this.state
+        const poll = polls.find(p => p.id === response.pollId)
+        const option = poll.opinions.find(o => o.id === response.selectedOption)
+
+        poll.totalVote++
+        option.vote++
+        const opinion = {
+            id: shortid.generate(),
+            name: response.name,
+            selectedOption: response.selectedOption
+        }
+
+        poll.opinions.push(opinion)
+        this.setState({ polls })
+
+    }
     render() {
         return (
             <Container className="my-5">
@@ -64,12 +81,17 @@ class App extends Component {
                             polls={this.state.polls}
                             searchTerm={this.state.searchTerm}
                             handleSearch={this.handleSearch}
-                            selectedPoll={this.selectedPoll}
+                            selectPoll={this.selectPoll}
                             addNewPoll={this.addNewPoll}
                         />
                     </Col>
                     <Col md={8}>
-                        <MainContent ></MainContent>
+                        <MainContent
+                            poll={this.state.selectedPoll}
+                            getOpinion={this.getOpinion}
+                            updatePoll={this.updatePoll}
+                            deletePoll={this.deletePoll}
+                        />
                     </Col>
                 </Row>
             </Container>
