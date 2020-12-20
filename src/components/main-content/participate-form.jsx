@@ -83,7 +83,13 @@ class ParticipationForm extends Component {
                                     />
                                     {opt.value}
                                     <span
-                                        style={{ padding: '5px 20px', background: 'green', color: 'white', borderRadius: '5px' }} className="ml-auto"
+                                        style={{
+                                            padding: '5px 20px',
+                                            background: 'green',
+                                            color: 'white',
+                                            borderRadius: '5px'
+                                        }}
+                                        className="ml-auto"
                                     >
                                         {opt.vate}
                                     </span>
