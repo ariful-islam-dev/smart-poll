@@ -20,8 +20,9 @@ export class Sidebar extends Component {
           <Input
             type="search"
             placeholder="Search"
-            onChange={(e) => this.props.handleChange(e.target.value)}
-            value={this.props.value}
+            value={this.props.searchTerm}
+            onChange={e => this.props.handleSearch(e.target.value)}
+            
           />
           <Button color="success" className="ml-2" onClick={this.toggleModal}>
             New
