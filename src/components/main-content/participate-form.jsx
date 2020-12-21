@@ -3,7 +3,7 @@ import { Button, CustomInput, Form, FormFeedback, FormGroup, Input, Label } from
 class ParticipationForm extends Component {
     state = {
         name: '',
-        selectedOption: '',
+        selectedOption:'',
         errors: {}
     }
 
@@ -12,7 +12,7 @@ class ParticipationForm extends Component {
             [event.target.name]: event.target.value
         })
     }
-    handleSubmit = (event) => {
+    handleSubmit = event => {
         event.preventDefault()
 
         const { errors, isValid } = this.validate()
@@ -26,7 +26,7 @@ class ParticipationForm extends Component {
             event.target.reset()
             this.setState({
                 name: '',
-                selecteOption: '',
+                selectedOption: '',
                 errors: {}
             })
         } else {
@@ -55,7 +55,7 @@ class ParticipationForm extends Component {
     render() {
         return (
             <div>
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit} className="mb-3">
                     <div className="d-flex">
                         <h4>Options</h4>
                         <Button
@@ -78,6 +78,7 @@ class ParticipationForm extends Component {
                                         type="radio"
                                         id={opt.id}
                                         name='selectedOption'
+                                        value={opt.id}
                                         onChange={this.handleChange}
                                         invalid={this.state.errors.selectedOption ? true : false}
                                     />
@@ -118,6 +119,11 @@ class ParticipationForm extends Component {
                     </FormGroup>
                     <Button type="submit">Submit Your Opinion</Button>
                 </Form>
+                <ul>
+                {
+                    this.props.poll.opinions.map(opin=><li><h3>{opin.name}</h3> <hr/></li>)
+                }
+                </ul>
             </div >
         )
     }

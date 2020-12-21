@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Modal, ModalBody, ModalHeader } from 'reactstrap'
-import PollForm from '../poll-form'
+
 import ParticipationForm from './participate-form'
+import PollForm from '../poll-form'
 
 class MainContent extends Component {
     state = {
@@ -42,7 +43,7 @@ class MainContent extends Component {
                     unmountOnClose={true}
                 >
                     <ModalHeader toggle={this.toggleModal}>
-                        Update Modal
+                        Update Poll
                     </ModalHeader>
                     <ModalBody>
                         <PollForm

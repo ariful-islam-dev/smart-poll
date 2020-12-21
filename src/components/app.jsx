@@ -16,7 +16,7 @@ class App extends Component {
         this.setState({ polls: POLLS })
     }
 
-    addNewPoll = (poll) => {
+    addNewPoll = poll => {
         poll.id = shortid.generate()
         poll.created = new Date()
         poll.totalVote = 0
@@ -27,13 +27,13 @@ class App extends Component {
         })
     }
 
-    updatePoll = (updatedPoll) => {
-        const polls = [...this.state.polls]
-        const poll = polls.find(p => p.id === updatedPoll.id)
+    updatePoll = updatedPoll => {
+        const polls = [...this.state.polls];
+        const poll = polls.find(p => p.id === updatedPoll.id);
 
         poll.title = updatedPoll.title
         poll.description = updatedPoll.description
-        poll.opinions = updatedPoll.opinions
+        poll.options = updatedPoll.options
 
         this.setState({
             polls
@@ -53,32 +53,39 @@ class App extends Component {
         })
     }
     handleSearch = searchTerm => {
+        this.setState({searchTerm})
+    }
 
+    performSearch = () => {
+        return this.state.polls.filter(poll => poll.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
     }
     getOpinion = response => {
-        const { polls } = this.state
+        const { polls } = this.state;
         const poll = polls.find(p => p.id === response.pollId)
-        const option = poll.opinions.find(o => o.id === response.selectedOption)
+        const option = poll.options.find(o => o.id === response.selectedOption)
 
-        poll.totalVote++
-        option.vote++
+        
+        poll.totalVote++;
+        option.vote++;
+       
         const opinion = {
             id: shortid.generate(),
             name: response.name,
             selectedOption: response.selectedOption
-        }
-
+        };
         poll.opinions.push(opinion)
         this.setState({ polls })
 
     }
     render() {
+        const polls = this.performSearch()
+        console.log(this.state);
         return (
             <Container className="my-5">
                 <Row>
                     <Col md={{ size: 4 }}>
                         <Sidebar
-                            polls={this.state.polls}
+                            polls={polls}
                             searchTerm={this.state.searchTerm}
                             handleSearch={this.handleSearch}
                             selectPoll={this.selectPoll}
